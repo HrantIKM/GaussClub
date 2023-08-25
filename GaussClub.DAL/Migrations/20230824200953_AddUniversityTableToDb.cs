@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace GaussClub.Migrations
+namespace GaussClub.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class AddUniversityTableToDb : Migration

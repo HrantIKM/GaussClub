@@ -19,4 +19,9 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GaussClub.DAL\GaussClub.DAL.csproj" />
+    <ProjectReference Include="..\GaussClub.Models\GaussClub.Models.csproj" />
+  </ItemGroup>
+
 </Project>

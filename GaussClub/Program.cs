@@ -1,4 +1,4 @@
-using GaussClub.Data;
+using GaussClub.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

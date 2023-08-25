@@ -1,7 +1,7 @@
 ﻿using GaussClub.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GaussClub.Data
+namespace GaussClub.DAL.Data
 {
     public class AppDbContext : DbContext
     {

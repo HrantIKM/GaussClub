@@ -1,4 +1,4 @@
-﻿using GaussClub.Data;
+﻿using GaussClub.DAL.Data;
 using GaussClub.Models;
 using Microsoft.AspNetCore.Mvc;
 
