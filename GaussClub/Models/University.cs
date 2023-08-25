@@ -6,8 +6,8 @@ namespace GaussClub.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [StringLength(200, MinimumLength = 2)]
+        [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
+        [StringLength(200, MinimumLength = 2, ErrorMessage = "Տվյալ դաշտը պետք է պարունակի 2-200 նիշ")]
         public string Name { get; set; }
         public bool IsActive { get; set; } = true;
     }
