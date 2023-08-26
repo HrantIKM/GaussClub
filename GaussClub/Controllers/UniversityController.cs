@@ -1,4 +1,4 @@
-﻿using GaussClub.DAL.Data;
+﻿using GaussClub.DAL.Contracts;
 using GaussClub.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,22 +6,23 @@ namespace GaussClub.Controllers
 {
     public class UniversityController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UniversityController(AppDbContext context)
+        public UniversityController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            var universities = _context.Universities.ToList();
+            var universities = _unitOfWork.UniversityRepository.GetAll().ToList();
+
             return View(universities);
         }
 
         public IActionResult Manage()
         {
-            var universities = _context.Universities.ToList();
+            var universities = _unitOfWork.UniversityRepository.GetAll().ToList();
 
             return View(universities);
         }
@@ -37,8 +38,8 @@ namespace GaussClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Universities.Add(university);
-                _context.SaveChanges();
+                _unitOfWork.UniversityRepository.Add(university);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Համալսարանը հաջողությամբ գրանցված է";
                 
@@ -58,7 +59,7 @@ namespace GaussClub.Controllers
                 return NotFound();
             }
 
-            var university = _context.Universities.Find(id);
+            var university = _unitOfWork.UniversityRepository.Get(u => u.Id == id);
 
             if (university == null)
             {
@@ -73,8 +74,8 @@ namespace GaussClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Universities.Update(university);
-                _context.SaveChanges();
+                _unitOfWork.UniversityRepository.Update(university);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Համալսարանը հաջողությամբ պահպանված է";
 
@@ -94,15 +95,15 @@ namespace GaussClub.Controllers
                 return NotFound();
             }
 
-            var university = _context.Universities.Find(id);
+            var university = _unitOfWork.UniversityRepository.Get(u => u.Id == id);
 
             if (university == null)
             {
                 return NotFound();
             }
 
-            _context.Universities.Remove(university);
-            _context.SaveChanges();
+            _unitOfWork.UniversityRepository.Remove(university);
+            _unitOfWork.Save();
 
             TempData["success"] = "Համալսարանը հաջողությամբ ջնջված է";
 
