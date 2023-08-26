@@ -3,8 +3,9 @@ using GaussClub.BLL.Services;
 using GaussClub.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GaussClub.Controllers
+namespace GaussClub.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class UniversityController : Controller
     {
         private readonly IUniversityService _universityService;
@@ -40,7 +41,7 @@ namespace GaussClub.Controllers
                 _universityService.Add(university);
 
                 TempData["success"] = "Համալսարանը հաջողությամբ գրանցված է";
-                
+
                 return RedirectToAction("Manage");
             }
 
