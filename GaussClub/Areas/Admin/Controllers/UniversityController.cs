@@ -1,5 +1,4 @@
 ﻿using GaussClub.BLL.Contracts;
-using GaussClub.BLL.Services;
 using GaussClub.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +41,7 @@ namespace GaussClub.Areas.Admin.Controllers
 
                 TempData["success"] = "Համալսարանը հաջողությամբ գրանցված է";
 
-                return RedirectToAction("Manage");
+                return RedirectToAction("Index");
             }
 
             TempData["error"] = "Համալսարանը չի գրանցվել";
@@ -77,7 +76,7 @@ namespace GaussClub.Areas.Admin.Controllers
 
                 TempData["success"] = "Համալսարանը հաջողությամբ պահպանված է";
 
-                return RedirectToAction("Manage");
+                return RedirectToAction("Index");
             }
 
             TempData["error"] = "Համալսարանը չի փոփոխվել";
@@ -104,7 +103,7 @@ namespace GaussClub.Areas.Admin.Controllers
 
             TempData["success"] = "Համալսարանը հաջողությամբ ջնջված է";
 
-            return RedirectToAction("Manage");
+            return RedirectToAction("Index");
         }
     }
 }

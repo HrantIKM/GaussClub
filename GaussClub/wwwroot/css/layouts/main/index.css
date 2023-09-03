@@ -1168,3 +1168,7 @@ a:focus {
 .form_container .check-box-group label {
 	margin-right: 15px;
 }
+
+.text-black {
+	color: black !important;
+}

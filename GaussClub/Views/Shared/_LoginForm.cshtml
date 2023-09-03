@@ -1,0 +1,21 @@
+﻿@*@using GaussIntellectualClub.Common.Models
+
+@model UserLoginModel
+*@
+<form method="post">
+@*	@Html.AntiForgeryToken()
+*@	<div class="form-group mt-3">
+		<input type="email" name="email" id="LoginEmail" class="form-style form-input"  placeholder = "Էլ․ փոստ" value="" />
+@*		<span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
+*@		<i class="input-icon fa fa-envelope-o"></i>
+	</div>
+	<div class="form-group mt-3">
+		<input type="password" name="password" id="LoginPassword" class="form-style form-input" placeholder="Գաղտնաբառ" value="" />
+@*		<span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
+*@		<span class="text-danger">
+@*			@(ViewBag.LoginErrorMessage != null ? ViewBag.LoginErrorMessage : "")
+*@		</span>
+		<i class="input-icon fa fa-key"></i>
+	</div>
+	<input type="submit" class="btn mt-4" value="Հաստատել" />
+</form>

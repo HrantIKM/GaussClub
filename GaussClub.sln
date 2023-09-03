@@ -5,11 +5,11 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GaussClub", "GaussClub\GaussClub.csproj", "{8341E0A4-5FF7-402D-8BAC-F2348E5B8B86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaussClub.DAL", "GaussClub.DAL\GaussClub.DAL.csproj", "{6B7A269C-3A6D-480A-B566-787BBD23AC32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GaussClub.DAL", "GaussClub.DAL\GaussClub.DAL.csproj", "{6B7A269C-3A6D-480A-B566-787BBD23AC32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaussClub.Models", "GaussClub.Models\GaussClub.Models.csproj", "{619526A0-DCE4-4D86-BE6B-268436EAA87B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GaussClub.Models", "GaussClub.Models\GaussClub.Models.csproj", "{619526A0-DCE4-4D86-BE6B-268436EAA87B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaussClub.BLL", "GaussClub.BLL\GaussClub.BLL.csproj", "{66D6E2DA-874A-4B71-8F69-A844F9E6150A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GaussClub.BLL", "GaussClub.BLL\GaussClub.BLL.csproj", "{66D6E2DA-874A-4B71-8F69-A844F9E6150A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

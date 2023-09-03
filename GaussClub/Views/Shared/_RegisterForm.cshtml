@@ -1,0 +1,34 @@
+﻿@*@using GaussIntellectualClub.Common.Models
+
+@model UserRegisterModel
+*@
+<form method="post">
+@*	@Html.AntiForgeryToken()
+*@
+	<div class="form-group">
+		<input type="text" name="FirstName" class="form-style form-input" id="RegisterFirstName" placeholder="Անուն" value="" />
+
+@*		<span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
+*@		<i class="input-icon fa fa-address-card-o"></i>
+	</div>
+	<div class="form-group mt-3">
+		<input type="text" name="LastName" class = "form-style form-input" id = "RegisterLastName" placeholder = "Ազգանուն" value="" />
+@*		<span class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</span>
+*@		<i class="input-icon fa fa-address-card-o"></i>
+	</div>
+	<div class="form-group mt-3">
+		<input type="email" name="email" id="RegisterEmail" class="form-style form-input" placeholder="Էլ․ փոստ" value="" />
+@*		<span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
+*@		<span class="text-danger">
+			@(ViewBag.DublicateErrorMessage != null ? ViewBag.DublicateErrorMessage : "")
+		</span>
+		<i class="input-icon fa fa-envelope-o"></i>
+	</div>
+	<div class="form-group mt-3">
+		<input type="password" name="password" id="RegisterPassword" class="form-style form-input" placeholder="Գաղտնաբառ" value="" />
+@*		<span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
+*@		<i class="input-icon fa fa-key"></i>
+	</div>
+	<input type="submit" class="btn mt-4" value="Հաստատել" />
+
+</form>

@@ -1,0 +1,720 @@
+﻿@*@using GaussIntellectualClub.Common.Models
+
+@model UserModel
+
+@{
+	ViewBag.Title = "Անձնական էջ";
+	var FN = (User as System.Security.Principal.GenericPrincipal).Claims.FirstOrDefault(u => u.Type == "FirstName").Value;
+	var LN = (User as System.Security.Principal.GenericPrincipal).Claims.FirstOrDefault(u => u.Type == "LastName").Value;
+	var fullName = $"{FN} {LN}";
+
+}*@
+
+@section styles {
+	<link href="~/css/user/details.css" rel="stylesheet" />
+}
+<div class="container">
+	<div class="main-body">
+		<!-- Breadcrumb -->
+		<nav aria-label="breadcrumb" class="main-breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a asp-area="" asp-controller="Home" asp-action="Index">Գլխավոր</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Անձնական էջ</li>
+			</ol>
+		</nav>
+		<!-- /Breadcrumb -->
+
+		<div class="row gutters-sm">
+			<div class="col-md-4 mb-3">
+				<div class="card">
+					<div class="card-body">
+						<div class="d-flex flex-column align-items-center text-center">
+							<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+							<div class="mt-3">
+								<h4>Hrant Sahakyan</h4>
+								<p class="text-secondary mb-1">Per aspera ad astra</p>
+								@*<h4>@Model.FullName</h4>
+								<p class="text-secondary mb-1">@Model.Bio</p>*@
+								<button class="btn btn-info">Խմբագրել</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel mt-4">
+					<div class="panel-heading">
+						<span class="panel-icon">
+							<i class="fa fa-bar-chart"></i>
+						</span>
+						<span class="panel-title"> Վիճակագրություն</span>
+					</div>
+					<div class="panel-body pn">
+						<table class="table mbn tc-icon-1 tc-med-2 tc-bold-last">
+							<tbody>
+								<tr>
+									<td>
+										<span class="fa fa-gamepad text-info"></span>
+									</td>
+									<td>Խաղեր</td>
+									<td>
+										$855,913
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span class="fa fa-trophy text-warning"></span>
+									</td>
+									<td>Հաղթանակ</td>
+									<td>
+										$349,712
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span class="fa fa-frown-o text-danger"></span>
+									</td>
+									<td>Պարտություն</td>
+									<td>
+										$1,259,742
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-icon">
+							<i class="fa fa-book"></i>
+						</span>
+						<span class="panel-title"> Հմտություններ</span>
+					</div>
+					<div class="panel-body pb5 ">
+						<span class="badge badge-warning text-white mr5 mb10 ib lh15">Մաթեմատիկա</span>
+						<span class="badge badge-primary mr5 mb10 ib lh15">Դիցաբանություն</span>
+						<span class="badge badge-info mr5 mb10 ib lh15">Աշխարհագրություն</span>
+						<span class="badge badge-success mr5 mb10 ib lh15">Կենսաբանություն</span>
+						<span class="badge badge-danger mr5 mb10 ib lh15">Հայ գրականություն</span>
+						<span class="badge badge-danger mr5 mb10 ib lh15">Հայոց լեզու</span>
+						<span class="badge badge-info mr5 mb10 ib lh15">Կինո</span>
+						<span class="badge badge-success mr5 mb10 ib lh15">Երաժշտություն</span>
+						<span class="badge badge-primary mr5 mb10 ib lh15">Սպորտ</span>
+
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-icon">
+							<i class="fa fa-university"></i>
+						</span>
+						<span class="panel-title">Կրթություն</span>
+					</div>
+					<div class="panel-body pb5 text-center">
+						<div>
+							<h4>Երևանի պետական համալսարան</h4>
+							<h6>Եվրոպական լեզուների և հաղորդակցության ֆակուլտետ</h6>
+							<p class="text-muted">
+								Միջմշակութային հաղորդակցություն․ անգլերեն և իսպաներեն լեզուներ <br /> (2016-2019)
+							</p>
+							<hr class="short br-lighter">
+						</div>
+						<div>
+							<h4>Երևանի պետական համալսարան</h4>
+							<h6>Եվրոպական լեզուների և հաղորդակցության ֆակուլտետ</h6>
+							<p class="text-muted">
+								Միջմշակութային հաղորդակցություն․ անգլերեն և իսպաներեն լեզուներ <br /> (2016-2019)
+							</p>
+							<hr class="short br-lighter">
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="card mb-3">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Անուն-ազգանուն</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								Hrant Sahakyan
+@*								@Model.FullName
+*@							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Էլ․ փոստ</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+							sahakyan@mail.ru
+@*								@Model.Email
+*@							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Կարգավիճակ</h6>
+							</div>
+							<div class="col-sm-9 text-white">
+								<span class="badge bg-success">Ակտիվ է</span>
+@*								<span class="badge bg-@(Model.IsActive ? "success" : "danger")">@(Model.IsActive ? "Ակտիվ է" : "Ակտիվ չէ")</span>
+*@							</div>
+						</div>
+
+						<hr>
+
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Ծննդյան ամսաթիվ</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+							IDK
+@*								@(Model.BirthDate.HasValue ? Model.BirthDate?.ToString("D") : "Չգիտենք :(")
+*@							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Գրանցվել է</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								01.01.2004
+@*								@(Model.CreatedAt?.ToString("D"))
+*@							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Հասանելի է</h6>
+							</div>
+							<div class="col-sm-9 text-secondary d-flex">
+								<a href="https://www.fb.com">
+									<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></h6>
+								</a>
+								<a href="https://www.instagram.com">
+									<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></h6>
+								</a>
+								<a href="https://www.telegram.com">
+									<h6 class="mb-0"><svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" fill="blue"></path> </svg></h6>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row mt-5 ml-0 mr-0">
+					<div class="tab-block">
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Հրապարակումներ</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Միջոցառումներ</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Թիմեր</button>
+							</li>
+						</ul>
+						<div class="tab-content" style="height: 730px;" id="myTabContent">
+							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+								<div class="profile-content">
+									<div class="tab-content p-0">
+										<div class="tab-pane fade active show" id="profile-post">
+											<ul class="timeline">
+												<li>
+													<div class="timeline-time">
+														<span class="date">today</span>
+														<span class="time">04:20</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username"><a href="javascript:;">Sean Ngu</a> <small></small></span>
+															<span class="pull-right text-muted">18 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p>
+																Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc faucibus turpis quis tincidunt luctus.
+																Nam sagittis dui in nunc consequat, in imperdiet nunc sagittis.
+															</p>
+														</div>
+														<div class="timeline-likes">
+															<div class="stats-right">
+																<span class="stats-text">259 Shares</span>
+																<span class="stats-text">21 Comments</span>
+															</div>
+															<div class="stats">
+																<span class="fa-stack fa-fw stats-icon">
+																	<i class="fa fa-circle fa-stack-2x text-danger"></i>
+																	<i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
+																</span>
+																<span class="fa-stack fa-fw stats-icon">
+																	<i class="fa fa-circle fa-stack-2x text-primary"></i>
+																	<i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+																</span>
+																<span class="stats-total">4.3k</span>
+															</div>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+														<div class="timeline-comment-box">
+															<div class="user"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
+															<div class="input">
+																<form action="">
+																	<div class="input-group">
+																		<input type="text" class="form-control rounded-corner" placeholder="Write a comment...">
+																		<span class="input-group-btn p-l-10">
+																			<button class="btn btn-primary f-s-12 rounded-corner" type="button">Comment</button>
+																		</span>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">yesterday</span>
+														<span class="time">20:17</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">82 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p>Location: United States</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">24 February 2014</span>
+														<span class="time">08:17</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">1,282 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p class="lead">
+																<i class="fa fa-quote-left fa-fw pull-left"></i>
+																Quisque sed varius nisl. Nulla facilisi. Phasellus consequat sapien sit amet nibh molestie placerat. Donec nulla quam, ullamcorper ut velit vitae, lobortis condimentum magna. Suspendisse mollis in sem vel mollis.
+																<i class="fa fa-quote-right fa-fw pull-right"></i>
+															</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">10 January 2014</span>
+														<span class="time">20:43</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">1,021,282 Views</span>
+														</div>
+														<div class="timeline-content">
+															<h4 class="template-title">
+																<i class="fa fa-map-marker text-danger fa-fw"></i>
+																795 Folsom Ave, Suite 600 San Francisco, CA 94107
+															</h4>
+															<p>In hac habitasse platea dictumst. Pellentesque bibendum id sem nec faucibus. Maecenas molestie, augue vel accumsan rutrum, massa mi rutrum odio, id luctus mauris nibh ut leo.</p>
+															<p class="m-t-20">
+																<img src="../assets/img/gallery/gallery-5.jpg" alt="">
+															</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														Loading...
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+								<div class="profile-content">
+									<div class="tab-content p-0">
+										<div class="tab-pane fade active show" id="profile-post">
+											<ul class="timeline">
+												<li>
+													<div class="timeline-time">
+														<span class="date">today</span>
+														<span class="time">04:20</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username"><a href="javascript:;">Sean Ngu</a> <small></small></span>
+															<span class="pull-right text-muted">18 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p>
+																Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc faucibus turpis quis tincidunt luctus.
+																Nam sagittis dui in nunc consequat, in imperdiet nunc sagittis.
+															</p>
+														</div>
+														<div class="timeline-likes">
+															<div class="stats-right">
+																<span class="stats-text">259 Shares</span>
+																<span class="stats-text">21 Comments</span>
+															</div>
+															<div class="stats">
+																<span class="fa-stack fa-fw stats-icon">
+																	<i class="fa fa-circle fa-stack-2x text-danger"></i>
+																	<i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
+																</span>
+																<span class="fa-stack fa-fw stats-icon">
+																	<i class="fa fa-circle fa-stack-2x text-primary"></i>
+																	<i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+																</span>
+																<span class="stats-total">4.3k</span>
+															</div>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+														<div class="timeline-comment-box">
+															<div class="user"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
+															<div class="input">
+																<form action="">
+																	<div class="input-group">
+																		<input type="text" class="form-control rounded-corner" placeholder="Write a comment...">
+																		<span class="input-group-btn p-l-10">
+																			<button class="btn btn-primary f-s-12 rounded-corner" type="button">Comment</button>
+																		</span>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">yesterday</span>
+														<span class="time">20:17</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">82 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p>Location: United States</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">24 February 2014</span>
+														<span class="time">08:17</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">1,282 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p class="lead">
+																<i class="fa fa-quote-left fa-fw pull-left"></i>
+																Quisque sed varius nisl. Nulla facilisi. Phasellus consequat sapien sit amet nibh molestie placerat. Donec nulla quam, ullamcorper ut velit vitae, lobortis condimentum magna. Suspendisse mollis in sem vel mollis.
+																<i class="fa fa-quote-right fa-fw pull-right"></i>
+															</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">10 January 2014</span>
+														<span class="time">20:43</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">1,021,282 Views</span>
+														</div>
+														<div class="timeline-content">
+															<h4 class="template-title">
+																<i class="fa fa-map-marker text-danger fa-fw"></i>
+																795 Folsom Ave, Suite 600 San Francisco, CA 94107
+															</h4>
+															<p>In hac habitasse platea dictumst. Pellentesque bibendum id sem nec faucibus. Maecenas molestie, augue vel accumsan rutrum, massa mi rutrum odio, id luctus mauris nibh ut leo.</p>
+															<p class="m-t-20">
+																<img src="../assets/img/gallery/gallery-5.jpg" alt="">
+															</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														Loading...
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+								<div class="profile-content">
+									<div class="tab-content p-0">
+										<div class="tab-pane fade active show" id="profile-post">
+											<ul class="timeline">
+												<li>
+													<div class="timeline-time">
+														<span class="date">today</span>
+														<span class="time">04:20</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username"><a href="javascript:;">Sean Ngu</a> <small></small></span>
+															<span class="pull-right text-muted">18 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p>
+																Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc faucibus turpis quis tincidunt luctus.
+																Nam sagittis dui in nunc consequat, in imperdiet nunc sagittis.
+															</p>
+														</div>
+														<div class="timeline-likes">
+															<div class="stats-right">
+																<span class="stats-text">259 Shares</span>
+																<span class="stats-text">21 Comments</span>
+															</div>
+															<div class="stats">
+																<span class="fa-stack fa-fw stats-icon">
+																	<i class="fa fa-circle fa-stack-2x text-danger"></i>
+																	<i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
+																</span>
+																<span class="fa-stack fa-fw stats-icon">
+																	<i class="fa fa-circle fa-stack-2x text-primary"></i>
+																	<i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+																</span>
+																<span class="stats-total">4.3k</span>
+															</div>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+														<div class="timeline-comment-box">
+															<div class="user"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
+															<div class="input">
+																<form action="">
+																	<div class="input-group">
+																		<input type="text" class="form-control rounded-corner" placeholder="Write a comment...">
+																		<span class="input-group-btn p-l-10">
+																			<button class="btn btn-primary f-s-12 rounded-corner" type="button">Comment</button>
+																		</span>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">yesterday</span>
+														<span class="time">20:17</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">82 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p>Location: United States</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">24 February 2014</span>
+														<span class="time">08:17</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">1,282 Views</span>
+														</div>
+														<div class="timeline-content">
+															<p class="lead">
+																<i class="fa fa-quote-left fa-fw pull-left"></i>
+																Quisque sed varius nisl. Nulla facilisi. Phasellus consequat sapien sit amet nibh molestie placerat. Donec nulla quam, ullamcorper ut velit vitae, lobortis condimentum magna. Suspendisse mollis in sem vel mollis.
+																<i class="fa fa-quote-right fa-fw pull-right"></i>
+															</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-time">
+														<span class="date">10 January 2014</span>
+														<span class="time">20:43</span>
+													</div>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														<div class="timeline-header">
+															<span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+															<span class="username">Sean Ngu</span>
+															<span class="pull-right text-muted">1,021,282 Views</span>
+														</div>
+														<div class="timeline-content">
+															<h4 class="template-title">
+																<i class="fa fa-map-marker text-danger fa-fw"></i>
+																795 Folsom Ave, Suite 600 San Francisco, CA 94107
+															</h4>
+															<p>In hac habitasse platea dictumst. Pellentesque bibendum id sem nec faucibus. Maecenas molestie, augue vel accumsan rutrum, massa mi rutrum odio, id luctus mauris nibh ut leo.</p>
+															<p class="m-t-20">
+																<img src="../assets/img/gallery/gallery-5.jpg" alt="">
+															</p>
+														</div>
+														<div class="timeline-footer">
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+															<a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-icon">
+														<a href="javascript:;">&nbsp;</a>
+													</div>
+													<div class="timeline-body">
+														Loading...
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--<div class="tab-content">
+						<div id="tab1" class="tab-pane active">-->
+						<!--</div>
+							<div id="tab2" class="tab-pane">
+
+
+							</div>
+							<div id="tab3" class="tab-pane"></div>
+							<div id="tab4" class="tab-pane"></div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section id="content" class="container">
+		</section>
+	</div>
+
+</div>
+

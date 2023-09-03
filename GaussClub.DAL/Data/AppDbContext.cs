@@ -11,5 +11,19 @@ namespace GaussClub.DAL.Data
         }
 
         public DbSet<University> Universities { get; set; }
+        public DbSet<Article> Articles { get; set; }
+/*        public DbSet<Label> Labels { get; set; }
+*/
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Article>()
+                .HasIndex(u => u.Slug)
+                .IsUnique();
+            
+            /*builder.Entity<Label>()
+                .HasIndex(u => u.Name)
+                .IsUnique();*/
+        }
+
     }
 }
