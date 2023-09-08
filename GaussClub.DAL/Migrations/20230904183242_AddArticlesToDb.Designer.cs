@@ -4,6 +4,7 @@ using GaussClub.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GaussClub.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230904183242_AddArticlesToDb")]
+    partial class AddArticlesToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +44,6 @@ namespace GaussClub.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -68,39 +68,6 @@ namespace GaussClub.DAL.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("GaussClub.Models.ArticleLabel", b =>
-                {
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LabelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ArticleId", "LabelId");
-
-                    b.HasIndex("LabelId");
-
-                    b.ToTable("ArticleLabels");
-                });
-
-            modelBuilder.Entity("GaussClub.Models.Label", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Labels");
-                });
-
             modelBuilder.Entity("GaussClub.Models.University", b =>
                 {
                     b.Property<int>("Id")
@@ -120,35 +87,6 @@ namespace GaussClub.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Universities");
-                });
-
-            modelBuilder.Entity("GaussClub.Models.ArticleLabel", b =>
-                {
-                    b.HasOne("GaussClub.Models.Article", "Article")
-                        .WithMany("ArticleLabels")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GaussClub.Models.Label", "Label")
-                        .WithMany("ArticleLabels")
-                        .HasForeignKey("LabelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
-
-                    b.Navigation("Label");
-                });
-
-            modelBuilder.Entity("GaussClub.Models.Article", b =>
-                {
-                    b.Navigation("ArticleLabels");
-                });
-
-            modelBuilder.Entity("GaussClub.Models.Label", b =>
-                {
-                    b.Navigation("ArticleLabels");
                 });
 #pragma warning restore 612, 618
         }

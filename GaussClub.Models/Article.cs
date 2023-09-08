@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GaussClub.Models
 {
@@ -12,22 +8,23 @@ namespace GaussClub.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
         [MaxLength(300)]
-        public string Title { get; set; }
-        [Required]
+        public string? Title { get; set; }
+        [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
         [MaxLength(350)]
-        public string Slug { get; set; }
-        [Required]
-        public string Content { get; set; }
-        [Required]
-        public string Author { get; set; }
+        //TODO: Make Uniqueness validation
+        public string? Slug { get; set; }
+        [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
+        public string? Content { get; set; }
+        [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
+        public string? Author { get; set; }
         [DefaultValue(true)]
         public bool IsActive { get; set; } = true;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-
-
-
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string? ImageUrl { get; set; }
+        [ValidateNever]
+        public IList<ArticleLabel>? ArticleLabels { get; set; }
     }
 }

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "GaussClub.DAL": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:60217;http://localhost:60218"
+    }
+  }
+}

@@ -21,12 +21,6 @@ namespace GaussClub.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Manage()
-        {
-            return View(_universityService.GetAll());
-        }
-
-        [HttpGet]
         public IActionResult Create()
         {
             return View();

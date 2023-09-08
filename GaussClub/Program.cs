@@ -15,6 +15,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Register Model Services
 builder.Services.AddScoped<IUniversityService, UniversityService>();
+builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<ILabelService, LabelService>();
 
 var app = builder.Build();
 

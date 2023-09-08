@@ -1,14 +1,14 @@
 ﻿<!-- Delete Modal HTML -->
-<div class="modal fade" id="deleteUniversityModal" tabindex="-1">
+<div class="modal fade" id="deleteArticleModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<form asp-controller="University" asp-action="Delete" data-action="@Url.Action("Delete", "University")" id="deleteUniversityModalForm" method="post">
+			<form asp-controller="Article" asp-action="Delete" data-action="@Url.Action("Delete", "Article")" id="deleteArticleModalForm" method="post">
 				<div class="modal-header">
-					<h4 class="modal-title">Հեռացնել համալսարանը</h4>
+					<h4 class="modal-title">Հեռացնել հրապարակումը</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">
-					<p>Դուք համոզվա՞ծ եք, որ ցանկանում եք հեռացնել տվյալ համալսարանը։</p>
+					<p>Դուք համոզվա՞ծ եք, որ ցանկանում եք հեռացնել տվյալ հրապարակումը։</p>
 					<p class="text-warning"><small>Այն վերականգնել հնարավոր չէ։</small></p>
 				</div>
 				<div class="modal-footer">

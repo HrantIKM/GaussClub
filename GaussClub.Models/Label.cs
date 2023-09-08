@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GaussClub.Models
 {
@@ -14,5 +10,8 @@ namespace GaussClub.Models
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+        [ValidateNever]
+        public IList<ArticleLabel>? ArticleLabels { get; set; }
+
     }
 }

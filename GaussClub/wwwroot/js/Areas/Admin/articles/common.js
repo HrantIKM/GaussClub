@@ -1,0 +1,3 @@
+﻿$(() => {
+	$('.labels-multiselect').select2();
+})

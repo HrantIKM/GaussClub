@@ -14,6 +14,7 @@ namespace GaussClub.DAL.Repositories
         {
             _context = context;
             dbSet = _context.Set<T>();
+            _context.Articles.Include("ArticleLabels");
         }
 
         public void Add(T entity)
@@ -21,12 +22,19 @@ namespace GaussClub.DAL.Repositories
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public virtual T? Get(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
 
             return query.FirstOrDefault();
+        }
+        public List<T> GetByQuery(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+
+            return query.ToList();
         }
 
         public IEnumerable<T> GetAll()
@@ -48,7 +56,14 @@ namespace GaussClub.DAL.Repositories
 
         public void Update(T entity)
         {
+            _context.Entry(entity).State = EntityState.Modified;
             dbSet.Update(entity);
         }
+
+        public bool Any(Expression<Func<T, bool>> predicate)
+        {
+            return dbSet.Any(predicate);
+        }
+
     }
 }

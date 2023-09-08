@@ -18,7 +18,7 @@ namespace GaussClub.BLL.Services
             return _unitOfWork.UniversityRepository.GetAll().ToList();
         }
 
-        public University GetById(int? id) { 
+        public University? GetById(int? id) { 
             return _unitOfWork.UniversityRepository.Get(u => u.Id == id);
         }
 
