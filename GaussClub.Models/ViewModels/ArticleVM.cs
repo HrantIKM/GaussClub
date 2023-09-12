@@ -6,5 +6,6 @@ namespace GaussClub.Models.ViewModels
     {
         public Article Article { get; set; }
         public List<int>? LabelIds { get; set; }
+        public List<Label>? ArticleLabels { get; set; }
     }
 }

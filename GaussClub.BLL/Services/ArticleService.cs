@@ -10,10 +10,12 @@ namespace GaussClub.BLL.Services
     public class ArticleService : IArticleService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILabelService _labelService;
 
-        public ArticleService(IUnitOfWork unitOfWork)
+        public ArticleService(IUnitOfWork unitOfWork, ILabelService labelService)
         {
             _unitOfWork = unitOfWork;
+            _labelService = labelService;
         }
         private Article SetupCreateData(ArticleVM viewModel)
         {
@@ -40,6 +42,7 @@ namespace GaussClub.BLL.Services
             entity.ArticleLabels?.Clear();
             entity.ArticleLabels = viewModel.LabelIds?.Select(labelId => new ArticleLabel
             {
+                Label = _labelService.GetById(labelId),
                 LabelId = labelId
             }).ToList();
             return entity;
@@ -58,12 +61,35 @@ namespace GaussClub.BLL.Services
         {
             return _unitOfWork.ArticleRepository.GetAll().ToList();
         }
+        public List<Article>? GetActiveArticles()
+        {
+            return _unitOfWork.ArticleRepository.GetSome(a => a.IsActive);
+        }
 
         public Article? GetById(int? id)
         {
             return _unitOfWork.ArticleRepository.Get(a => a.Id == id);
         }
+        public Article? GetBySlug(string slug)
+        {
+            return _unitOfWork.ArticleRepository.Get(a => a.Slug == slug && a.IsActive);
+        }
 
+        public ArticleVM GetArticleVM(Article? article)
+        {
+            var labels = new List<Label>();
+
+            foreach (var label in article.ArticleLabels)
+            {
+                labels.Add(_labelService.GetById(label.LabelId));
+            }
+
+            return new ArticleVM
+            {
+                Article = article,
+                ArticleLabels = labels
+            };
+        }
         public void Add(ArticleVM articleVM, string rootPath, IFormFile? file)
         {
             if (_unitOfWork.ArticleRepository.Any(a => a.Slug == articleVM.Article.Slug))

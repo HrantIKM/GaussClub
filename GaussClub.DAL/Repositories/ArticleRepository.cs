@@ -25,5 +25,12 @@ namespace GaussClub.DAL.Repositories
 
             return query.FirstOrDefault();
         }
+
+        public List<Article>? GetSome(Expression<Func<Article, bool>> filter)
+        {
+            IQueryable<Article> query = dbSet;
+            query = query.Where(filter).Include("ArticleLabels");
+            return query.ToList();
+        }
     }
 }

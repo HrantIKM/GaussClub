@@ -1,6 +1,10 @@
-﻿
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<Article>
+
 @{
-ViewData["Title"] = "Հրապարակումներ";
+	ViewData["Title"] = "Հրապարակումներ";
 }
 
 <h2 class="text-center mt-5 mb-5">@ViewData["Title"]</h2>
@@ -11,53 +15,42 @@ ViewData["Title"] = "Հրապարակումներ";
 		<div class="col-lg-9">
 
 			<div class="row">
-				@*@foreach (var Article in Model)
-				{*@
-					<div class="col-md-4">
-						<div class="card mb-4 product-wap rounded-0">
-							<div class="card rounded-0">
-								<img class="card-img rounded-0 img-fluid" src="~/Resources/images/about-1.png">
-							</div>
-							<div class="card-body">
-@*								@Html.ActionLink(Article.Title, "Show", "Article", new { slug = Article.Slug }, new { @class = "h3 text-decoration-none" })
-*@								<ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-									<li class="w-100 text-right font-italic">Hrant Sahakyan</li>
-									<li class="pt-2">
-										<span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-										<span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-										<span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-										<span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-										<span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-									</li>
-								</ul>
-								<ul class="list-unstyled d-flex justify-content-center mb-1">
-									<li>
-										<i class="text-warning fa fa-star"></i>
-										<i class="text-warning fa fa-star"></i>
-										<i class="text-warning fa fa-star"></i>
-										<i class="text-muted fa fa-star"></i>
-										<i class="text-muted fa fa-star"></i>
-									</li>
-								</ul>
-								<p class="text-center mb-0">$250.00</p>
+				@if (Model != null && Model.Count > 1)
+				{
+					@foreach (var article in Model)
+					{
+						<div class="col-md-4">
+							<div class="card mb-4 product-wap rounded-0">
+								<div class="card rounded-0">
+									<img class="card-img rounded-0 img-fluid" src="~/@article.ImageUrl">
+								</div>
+								<div class="card-body">
+									<a asp-controller="Article" asp-action="Details" asp-route-slug="@article.Slug" class="h3 text-decoration-none">@article.Title</a>
+									<ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+										<li class="w-100 text-right font-italic">@article.Author</li>
+									</ul>
+								</div>
 							</div>
 						</div>
-					</div>
-				@*}*@
+					}
+				}
 			</div>
-
 			<div div="row">
-				<ul class="pagination pagination-lg justify-content-end">
-					<li class="page-item disabled">
-						<a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
-					</li>
-				</ul>
+				@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new
+		   {
+			   page = page,
+			   searchfor = @Context.Request.Query["searchfor"],
+			   searchby = @Context.Request.Query["searchby"]
+		   }),
+					new X.PagedList.Web.Common.PagedListRenderOptions
+					{
+						UlElementClasses = new[] { "pagination", "justify-content-center", "mt-3" },
+						LiElementClasses = new string[] { "page-item" },
+						PageClasses = new string[] { "page-link" },
+						MaximumPageNumbersToDisplay = 5,
+						LinkToNextPageFormat = "Հաջորդ",
+						LinkToPreviousPageFormat = "Նախորդ"
+					})
 			</div>
 		</div>
 	</div>

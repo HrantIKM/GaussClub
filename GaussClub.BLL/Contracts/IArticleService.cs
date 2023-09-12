@@ -8,7 +8,10 @@ namespace GaussClub.BLL.Contracts
     {
         ArticleVM? SetupViewData(Article? article);
         List<Article> GetAll();
+        List<Article>? GetActiveArticles();
         Article? GetById(int? id);
+        Article? GetBySlug(string slug);
+        ArticleVM GetArticleVM(Article? article);
         void Add(ArticleVM articleVM, string rootPath, IFormFile? file);
         void Update(ArticleVM articleVM, string rootPath, IFormFile? file);
         void Remove(Article article, string rootPath);
