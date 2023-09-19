@@ -1,34 +1,80 @@
 ﻿@*@using GaussIntellectualClub.Common.Models
 
-@model UserRegisterModel
+	@model UserRegisterModel
 *@
-<form method="post">
+<!--<form method="post">-->
 @*	@Html.AntiForgeryToken()
 *@
-	<div class="form-group">
-		<input type="text" name="FirstName" class="form-style form-input" id="RegisterFirstName" placeholder="Անուն" value="" />
-
+<!--<div class="form-group">
+	<input type="text" name="FirstName" class="form-style form-input" id="RegisterFirstName" placeholder="Անուն" value="" />-->
 @*		<span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
-*@		<i class="input-icon fa fa-address-card-o"></i>
-	</div>
-	<div class="form-group mt-3">
-		<input type="text" name="LastName" class = "form-style form-input" id = "RegisterLastName" placeholder = "Ազգանուն" value="" />
+*@
+<!--<i class="input-icon fa fa-address-card-o"></i>
+</div>
+<div class="form-group mt-3">
+	<input type="text" name="LastName" class = "form-style form-input" id = "RegisterLastName" placeholder = "Ազգանուն" value="" />-->
 @*		<span class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</span>
-*@		<i class="input-icon fa fa-address-card-o"></i>
-	</div>
-	<div class="form-group mt-3">
-		<input type="email" name="email" id="RegisterEmail" class="form-style form-input" placeholder="Էլ․ փոստ" value="" />
+*@
+<!--<i class="input-icon fa fa-address-card-o"></i>
+</div>
+<div class="form-group mt-3">
+	<input type="email" name="email" id="RegisterEmail" class="form-style form-input" placeholder="Էլ․ փոստ" value="" />-->
 @*		<span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
-*@		<span class="text-danger">
-			@(ViewBag.DublicateErrorMessage != null ? ViewBag.DublicateErrorMessage : "")
-		</span>
-		<i class="input-icon fa fa-envelope-o"></i>
-	</div>
-	<div class="form-group mt-3">
-		<input type="password" name="password" id="RegisterPassword" class="form-style form-input" placeholder="Գաղտնաբառ" value="" />
+*@
+<!--<span class="text-danger">
+		@(ViewBag.DublicateErrorMessage != null ? ViewBag.DublicateErrorMessage : "")
+	</span>
+	<i class="input-icon fa fa-envelope-o"></i>
+</div>
+<div class="form-group mt-3">
+	<input type="password" name="password" id="RegisterPassword" class="form-style form-input" placeholder="Գաղտնաբառ" value="" />-->
 @*		<span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
-*@		<i class="input-icon fa fa-key"></i>
+*@
+<!--<i class="input-icon fa fa-key"></i>
 	</div>
 	<input type="submit" class="btn mt-4" value="Հաստատել" />
 
+</form>-->
+
+@model RegisterModel
+
+<form id="registerForm" asp-page="/Account/Register" method="post">
+	<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+	<div class="form-group form-floating mt-3">
+		<input asp-for="Input.FirstName" id="RegisterFirstName" class="form-style form-input form-input-clearable" aria-required="true" placeholder="Անուն" />
+		<span asp-validation-for="Input.FirstName" class="text-danger"></span>
+		<i class="input-icon fa fa-address-card-o"></i>
+	</div>
+	<div class="form-group form-floating mt-3">
+		<input asp-for="Input.LastName" id="RegisterLastName" class="form-style form-input form-input-clearable" aria-required="true" placeholder="Ազգանուն" />
+		<span asp-validation-for="Input.LastName" class="text-danger"></span>
+		<i class="input-icon fa fa-address-card-o"></i>
+	</div>
+	<div class="form-group form-floating mt-3">
+		<input asp-for="Input.Email" id="LoginEmail" class="form-style form-input form-input-clearable" autocomplete="username" aria-required="true" placeholder="Էլ․ փոստ" />
+		<span asp-validation-for="Input.Email" class="text-danger"></span>
+		<i class="input-icon fa fa-envelope-o"></i>
+	</div>
+	<div class="form-group form-floating mt-3">
+		<input asp-for="Input.Password" class="form-style form-input form-input-clearable" autocomplete="current-password" aria-required="true" placeholder="Գաղտնաբառ" />
+		<span asp-validation-for="Input.Password" class="text-danger"></span>
+		<i class="input-icon fa fa-key"></i>
+	</div>
+	<div class="form-group form-floating mt-3">
+		<input asp-for="Input.ConfirmPassword" class="form-style form-input form-input-clearable" autocomplete="confirm-password" aria-required="true" placeholder="Հաստատել գաղտնաբառը" />
+		<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+		<i class="input-icon fa fa-key"></i>
+	</div>
+	<div class="form-group form-floating mt-3">	
+		<select asp-for="Input.Role" asp-items="@ViewData["RoleList"] as IQueryable<SelectListItem>" class="form-style form-select form-input">
+			<option disabled selected>Ընտրել դերը</option>
+		</select>
+		<i class="input-icon fa fa-address-card"></i>
+	</div>
+	<div>
+		<p>
+			<a id="forgot-password" asp-page="./ForgotPassword">Մոռացե՞լ եք գաղտնաբառը</a>
+		</p>
+	</div>
+	<button id="login-submit" type="submit" class="btn mt-4">Հաստատել</button>
 </form>

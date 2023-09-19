@@ -1172,3 +1172,8 @@ a:focus {
 .text-black {
 	color: black !important;
 }
+
+
+#logout {
+	cursor: pointer;
+}

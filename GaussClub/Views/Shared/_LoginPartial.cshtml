@@ -1,27 +1,51 @@
-﻿@using Microsoft.AspNetCore.Identity
-
-@inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+	@if (SignInManager.IsSignedIn(User))
+	{
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Իմ էջը
+			</a>
+			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+
+
+				@*<a asp-area="" asp-controller="Profile" asp-action="Index" class="dropdown-item text-black text-left">
+					<i class="fa fa-user-circle" aria-hidden="true"></i><span>Պրոֆիլ</span>
+				</a>*@
+				<a id="manage" class="dropdown-item text-black text-left" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+					<i class="fa fa-user-circle" aria-hidden="true"></i><span>Պրոֆիլ</span>
+				</a>
+
+				@if (User.IsInRole(Roles.Role_Admin))
+				{ 
+				<a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="dropdown-item text-black text-left">
+					<i class="fa fa-list-alt" aria-hidden="true"></i><span>Վահանակ</span>
+				</a>
+				}
+
+				<a asp-area="" asp-controller="Chat" asp-action="Index" class="dropdown-item text-black text-left">
+					<i class="fa fa-comments" aria-hidden="true"></i><span>Չատ</span>
+				</a>
+				<a asp-area="" asp-controller="Notification" asp-action="Index" class="dropdown-item text-black text-left">
+					<i class="fa fa-bell" aria-hidden="true"></i><span>Ծանուցումներ</span>
+				</a>
+				<div class="dropdown-divider"></div>
+				<form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+					<a id="logout" class="dropdown-item dropdown-item text-black text-left "><i class="fa fa-sign-out" aria-hidden="true"></i>Դուրս գալ</a>
+				</form>
+			</div>
+		</li>
+
+	}
+	else
+	{
+		<li class="nav-item">
+			<a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Մուտք</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Գրանցում</a>
+		</li>
+	}
 </ul>

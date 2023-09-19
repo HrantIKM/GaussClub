@@ -1,10 +1,13 @@
 ﻿using GaussClub.BLL.Contracts;
 using GaussClub.Models.ViewModels;
+using GaussClub.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GaussClub.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Roles.Role_Admin)]
     public class ArticleController : Controller
     {
         private readonly IArticleService _articleService;

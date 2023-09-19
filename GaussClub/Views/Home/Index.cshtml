@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
 	ViewData["Title"] = "Գլխավոր";
 }
 @*Start of slider*@
@@ -19,10 +22,13 @@
 									<p>
 										Գրանցե՛ք ձեր թիմը և մասնակցեք առաջնություններին։
 									</p>
-									<div class="btn-box">
-										@Html.ActionLink("Մուտք", "Index", "Login", null, new { @class = "btn-1" })
-										@Html.ActionLink("Գրանցվել", "Index", "Register", null, new { @class = "btn-2" })
-									</div>
+									@if (!SignInManager.IsSignedIn(User))
+									{
+										<div class="btn-box">
+											<a class="btn-1" asp-area="Identity" asp-page="/Account/Login">Մուտք</a>
+											<a class="btn-2" asp-area="Identity" asp-page="/Account/Register">Գրանցվել</a>
+										</div>
+									}
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -49,12 +55,13 @@
 									<p>
 										Առաջինն իմացեք Հայաստանում տեղի ունեցող ինտելեկտուալ խաղերի մասին։
 									</p>
-
-									<div class="btn-box">
-										@Html.ActionLink("Մուտք", "Index", "Login", null, new { @class = "btn-1" })
-										@Html.ActionLink("Գրանցվել", "Index", "Register", null, new { @class = "btn-2" })
-									</div>
-
+									@if (!SignInManager.IsSignedIn(User))
+									{
+										<div class="btn-box">
+											<a class="btn-1" asp-area="Identity" asp-page="/Account/Login">Մուտք</a>
+											<a class="btn-2" asp-area="Identity" asp-page="/Account/Register">Գրանցվել</a>
+										</div>
+									}
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -81,12 +88,13 @@
 									<p>
 										Մասնակցե՛ք թիմով կամ անհատապես, գրանցեք հաջողություններ և ստացեք թիմերին միանալու առաջարկներ։
 									</p>
-
-									<div class="btn-box">
-										@Html.ActionLink("Մուտք", "Index", "Login", null, new { @class = "btn-1" })
-										@Html.ActionLink("Գրանցվել", "Index", "Register", null, new { @class = "btn-2" })
-									</div>
-
+									@if (!SignInManager.IsSignedIn(User))
+									{
+										<div class="btn-box">
+											<a class="btn-1" asp-area="Identity" asp-page="/Account/Login">Մուտք</a>
+											<a class="btn-2" asp-area="Identity" asp-page="/Account/Register">Գրանցվել</a>
+										</div>
+									}
 								</div>
 							</div>
 							<div class="col-md-6">

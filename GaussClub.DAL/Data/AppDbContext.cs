@@ -16,6 +16,7 @@ namespace GaussClub.DAL.Data
         public DbSet<University> Universities { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Label> Labels { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<ArticleLabel> ArticleLabels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

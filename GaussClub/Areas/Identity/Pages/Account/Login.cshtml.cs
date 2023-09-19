@@ -14,17 +14,23 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GaussClub.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            SignInManager<IdentityUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
+            ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
         }
 
@@ -64,7 +70,7 @@ namespace GaussClub.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -72,7 +78,7 @@ namespace GaussClub.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -97,6 +103,16 @@ namespace GaussClub.Areas.Identity.Pages.Account
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            ViewData["RoleList"] = _roleManager.Roles.Select(r => r.Name).Select(i => new SelectListItem
+            {
+                Text = i,
+                Value = i
+            });
+
+            ViewData["SignInManager"] = _signInManager;
+            ViewData["RoleManager"] = _roleManager;
+            ViewData["Logger"] = _logger;
 
             ReturnUrl = returnUrl;
         }

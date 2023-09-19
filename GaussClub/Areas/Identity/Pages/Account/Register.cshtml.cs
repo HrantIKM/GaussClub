@@ -2,28 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
+using GaussClub.Models;
+using GaussClub.Utility;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 
 namespace GaussClub.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
@@ -32,12 +30,14 @@ namespace GaussClub.Areas.Identity.Pages.Account
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -52,6 +52,8 @@ namespace GaussClub.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
+        [ValidateNever]
+        public SelectList RoleList { get; set; }
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -70,21 +72,30 @@ namespace GaussClub.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
+            [StringLength(150, ErrorMessage = "Տվյալ դաշտը նվազագույնը պետք է պարունակի {2} նիշ, առավելագույնը՝ {1}", MinimumLength = 2)]
+            [Display(Name = "Անուն")]
+            public string? FirstName { get; set; }
+
+            [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
+            [StringLength(150, ErrorMessage = "Տվյալ դաշտը նվազագույնը պետք է պարունակի {2} նիշ, առավելագույնը՝ {1}", MinimumLength = 2)]
+            [Display(Name = "Ազգանուն")]
+            public string? LastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
+            [EmailAddress(ErrorMessage = "Իրական էլ․ փոստ չէ")]
+            [Display(Name = "Էլ․ փոստ")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
+            [StringLength(100, ErrorMessage = "Տվյալ դաշտը նվազագույնը պետք է պարունակի {2} նիշ, առավելագույնը՝ {1}", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -93,16 +104,38 @@ namespace GaussClub.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required(ErrorMessage = "Տվյալ դաշտը պարտադիր է")]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Հաստատել գաղտնաբառը")]
+            [Compare("Password", ErrorMessage = "Գաղտնաբառերի դաշտերը չեն համապատասխանում")]
             public string ConfirmPassword { get; set; }
+
+            public string? Role { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (!_roleManager.RoleExistsAsync(Roles.Role_Admin).GetAwaiter().GetResult())
+            {
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_User)).GetAwaiter().GetResult();
+            }
+
+            ViewData["RoleList"] = _roleManager.Roles.Select(r => r.Name).Select(i => new SelectListItem
+            {
+                Text = i,
+                Value = i
+            });
+
             ReturnUrl = returnUrl;
+
+            ViewData["UserManager"] = _userManager;
+            ViewData["RoleManager"] = _roleManager;
+            ViewData["UserStore"] = _userStore;
+            ViewData["SignInManager"] = _signInManager;
+            ViewData["Logger"] = _logger;
+            ViewData["EmailSender"] = _emailSender;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -116,11 +149,23 @@ namespace GaussClub.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if (!String.IsNullOrEmpty(Input.Role))
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.Role_User);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -154,26 +199,26 @@ namespace GaussClub.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private User CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<User>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(User)}'. " +
+                    $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
         private IUserEmailStore<IdentityUser> GetEmailStore()
         {
-            if (!_userManager.SupportsUserEmail)
-            {
-                throw new NotSupportedException("The default UI requires a user store with email support.");
-            }
+            /*            if (!_userManager.SupportsUserEmail)
+                        {
+                            throw new NotSupportedException("The default UI requires a user store with email support.");
+                        }*/
             return (IUserEmailStore<IdentityUser>)_userStore;
         }
     }
